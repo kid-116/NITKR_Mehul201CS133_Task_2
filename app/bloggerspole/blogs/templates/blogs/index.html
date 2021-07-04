@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    BloggersPole
+{% endblock %}
+
+{% block style %}
+    article {
+        border: 1px solid black;
+        width: 500px;
+        margin: 20px;
+    }
+{% endblock %}
+
+{% block body %}
+    {% if blogs %}
+        {% for blog in blogs %}
+            <a href="{% url 'blogs:read_path' id_b=blog.id %}">
+                <article>
+                    <header>
+                        <h3>{{ blog.title }}</h3>
+                        <h4>by {{ blog.author.username }}</h4>
+                        <ul>
+                            <li>Upvotes: {{ blog.upvotes }}</li>
+                            <li>Downvotes: {{ blog.downvotes }}</li>
+                        </ul>
+                    </header>
+                    {% if blog.thumb %}
+                        <figure>
+                            <img src="{{ blog.thumb.url }}">
+                        </figure>
+                    {% endif %}
+                    <main>
+                        <p>{{ blog.snippet }}</p>
+                    </main>
+                </article>
+            </a>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

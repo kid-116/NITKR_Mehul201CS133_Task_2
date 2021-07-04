@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>
+            {% block title %}
+            {% endblock %}
+        </title>
+        <style>
+            {% block style %}
+            {% endblock %}
+        </style>
+    </head>
+    <body>
+        <header>
+            <a href="{% url 'blogs:index_path' %}"><h1>Bloggers-Pole</h1></a>
+            <nav>
+                <ul>
+                    {% if user.is_authenticated %}
+                        <li>{{ request.user.username }}</li>
+                        <a href="{% url 'accounts:logout_path' %}"><li>Logout</li></a>
+                        <a href="{% url 'blogs:create_path' %}"><li>New Blog</li></a>
+                    {% else %}
+                        <a href="{% url 'accounts:login_path' %}" class="login"><li>Login</li></a>
+                        <a href="{% url 'accounts:signup_path' %}" class="signup"><li>Signup</li></a>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>

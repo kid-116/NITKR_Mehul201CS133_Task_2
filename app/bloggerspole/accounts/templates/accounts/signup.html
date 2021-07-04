@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    BloggersPole | Signup
+{% endblock %}
+
+{% block style %}
+    a.signup {
+        display: none;
+    }
+{% endblock %}
+
+{% block body %}
+    <h2>Signup</h2>
+    <form action="{% url 'accounts:signup_path' %}" method="post">
+        {% csrf_token %}
+        <table>
+            {% if form.errors %}
+                <tr>
+                    {{ form.non_field_errors }}
+                </tr>
+            {% endif %}
+            {% for field in form.visible_fields %}
+                <tr>
+                    <th>{{ field.label_tag }}</th>
+                    <td>
+                        {{ field }}
+                        {% if field.help_text %}
+                            {{ field.help_text }}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <input type="submit" value="Signup">
+    </form>
+{% endblock %}

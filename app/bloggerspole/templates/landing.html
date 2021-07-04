@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>BloggersPole</title>
+    </head>
+    <body>
+        <main>
+            <h5>Welcome to<h5>
+            <h1>Bloggers-Pole</h1>
+            <h3>Blog to Inspire</h3>
+            <nav>
+                <ul>
+                    <a href="{% url 'accounts:login_path' %}"><li>Login<br>For existing users</li></a>
+                    <a href="{% url 'accounts:signup_path' %}"><li>Signup<br>Hurry up! Join us today</li></a>
+                </ul>
+            </nav>
+        </main>
+    </body>
+</html>

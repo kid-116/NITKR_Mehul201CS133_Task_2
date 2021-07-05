@@ -6,7 +6,7 @@
 
 {% block body %}
     <h2>{{ blog.title }}</h2>
-    <form action="{% url 'blogs:update_path' id_b=blog.id %}" method="post">
+    <form action="{% url 'blogs:update_path' id_b=blog.id %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <table>
             {% if form.errors %}

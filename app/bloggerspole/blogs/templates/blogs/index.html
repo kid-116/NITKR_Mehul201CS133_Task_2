@@ -10,6 +10,9 @@
         width: 500px;
         margin: 20px;
     }
+    img {
+        width: 300px;
+    }
 {% endblock %}
 
 {% block body %}
@@ -27,7 +30,7 @@
                     </header>
                     {% if blog.thumb %}
                         <figure>
-                            <img src="{{ blog.thumb.url }}">
+                            <img src="{{ blog.thumb.url }}" alt="{{ blog.title }}">
                         </figure>
                     {% endif %}
                     <main>

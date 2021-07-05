@@ -37,15 +37,22 @@ def read(request, id_b):
 
 @login_required(login_url='accounts:login_path')
 def update(request, id_b):
-    if request.user == Blog.objects.get(id=id_b).author:
-        blog = Blog.objects.get(id=id_b)
-        form = NewBlogForm(request.POST or None, instance=blog)
-        if form.is_valid():
-            form.save()
-            return redirect('blogs:read_path', id_b=id_b)
-        return render(request, 'blogs/update.html', { 'form': form, 'blog': blog })
-    else:
+    blog = Blog.objects.get(id=id_b)
+    if request.user != blog.author:
         raise PermissionError
+    if request.method == 'POST':
+        form = NewBlogForm(request.POST, request.FILES)
+        if form.is_valid():
+            upt_blog = form.save(commit=False)
+            blog.title = upt_blog.title
+            blog.body = upt_blog.body
+            blog.thumb = upt_blog.thumb
+            blog.save()
+            return redirect('blogs:read_path', id_b=id_b)
+    else:
+        form = NewBlogForm(instance=blog)
+    return render(request, 'blogs/update.html', { 'form': form, 'blog': blog })
+
 
 @login_required(login_url='accounts:login_path')
 def delete(request, id_b):

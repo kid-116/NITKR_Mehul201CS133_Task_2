@@ -6,9 +6,9 @@
 
 {% block body %}
     <h2>New Blog</h2>
-    <form action="{% url 'blogs:create_path' %}" method="post">
+    <form action="{% url 'blogs:create_path' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <table>
+        <!-- <table>
             {% if form.errors %}
                 <tr>
                     {{ form.non_field_errors }}
@@ -25,7 +25,8 @@
                     </td>
                 </tr>
             {% endfor %}
-        </table>
+        </table> -->
+        {{ form }}
         <input type="submit" value="Publish">
     </form>
 {% endblock %}

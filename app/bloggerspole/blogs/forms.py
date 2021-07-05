@@ -7,5 +7,5 @@ class NewBlogForm(forms.ModelForm):
         fields = [
             'title',
             'body',
-            'thumb'
+            'thumb',
         ]
